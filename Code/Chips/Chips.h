@@ -39,6 +39,48 @@ namespace Chips {
             }
     };
 
+    class Adder4Bit : public Gates::CustomGate<9, 5> {
+        private:
+            Adder adder0;
+            Adder adder1;
+            Adder adder2;
+            Adder adder3;
+
+        public:
+            void run() override {
+                adder0.input[0] = input[0];
+                adder0.input[1] = input[8];
+                adder0.input[2] = 0;
+
+                adder0.run();
+
+                adder1.input[0] = input[1];
+                adder1.input[1] = input[9];
+                adder1.input[2] = adder0.output[1];
+
+                adder1.run();
+
+                adder2.input[0] = input[2];
+                adder2.input[1] = input[10];
+                adder2.input[2] = adder1.output[1];
+
+                adder2.run();
+
+                adder3.input[0] = input[3];
+                adder3.input[1] = input[11];
+                adder3.input[2] = adder2.output[1];
+
+                adder3.run();
+
+                output[0] = adder0.output[0];
+                output[1] = adder1.output[0];
+                output[2] = adder2.output[0];
+                output[3] = adder3.output[0];
+
+                output[4] = adder3.output[1];
+            }
+    };
+
     class Adder8Bit : public Gates::CustomGate<16, 9> {
         private:
             Adder adder0;
@@ -251,6 +293,61 @@ namespace Chips {
                 output[16] = adder15.output[1];
             }
     };
+
+    // class multiplier4Bit : public Gates::CustomGate<8, 4> {
+    //     private:
+    //         Gates::andGate and0;
+    //         Gates::andGate and1;
+    //         Gates::andGate and2;
+    //         Gates::andGate and3;
+    //         Gates::andGate and4;
+    //         Gates::andGate and5;
+
+    //         Gates::XORGate xor0;
+    //         Gates::XORGate xor1;
+
+    //     public:
+    //         void run() override {
+    //             and0.input[0] = input[0];
+    //             and0.input[1] = input[4];
+
+    //             and1.input[0] = input[1];
+    //             and1.input[1] = input[5];
+
+    //             and2.input[0] = input[2];
+    //             and2.input[1] = input[6];
+
+    //             and3.input[0] = input[3];
+    //             and3.input[1] = input[7];
+
+    //             and0.run();
+    //             and1.run();
+    //             and2.run();
+    //             and3.run();
+
+    //             xor0.input[0] = and1.output;
+    //             xor0.input[1] = and2.output;
+    //             xor0.run();
+
+    //             and4.input[1] = and1.output;
+    //             and4.input[0] = and2.output;
+    //             and4.run();
+
+    //             xor1.input[0] = and4.output;
+    //             xor1.input[1] = and3.output;
+    //             xor1.run();
+
+    //             and5.input[0] = and4.output;
+    //             and5.input[1] = and3.output;
+    //             and5.run();
+
+    //             output[0] = and0.output;
+    //             output[1] = xor0.output;
+    //             output[2] = xor1.output;
+    //             output[3] = and5.output;
+    //         }
+
+    // }
 
     // class ALU : public Gates::CustomGate<33, 18> {
     //     private:
