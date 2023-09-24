@@ -3,7 +3,7 @@
 
 #include <vector>
 
-std::vector<short> Memory;
+std::vector<short> Memory(65536);
 short dataBus;
 
 void GetAddress(short Address) {
