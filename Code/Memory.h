@@ -27,12 +27,4 @@ short RegSP;
 short dataBus;
 short addressBus;
 
-void GetAddress(short Address) {
-    dataBus = Memory.at(Address);
-}
-
-void SetAddress(short Address) {
-    Memory.at(Address) = dataBus;
-}
-
 #endif
