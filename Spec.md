@@ -37,7 +37,7 @@ B: GP Regester
 C: Output Regester
 G: Address Regester
 
-I: Instruction Regester
+I: Instruction Regesters
 	I.D: args0
 	I.E: args1
 
