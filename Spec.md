@@ -15,7 +15,7 @@ This means you can't chnage any Program Memory when Hunga-8 is running.
 00111: STB                          -> B = DATA BUS
 01000: AND   reg0, reg1             -> C = reg0 & reg1
 01001: OR    reg0, reg1             -> C = reg0 | reg1
-01010: NOR   reg0, reg1             -> C = !(reg0 || reg1)
+01010: NOR   reg0, reg1             -> C = !(reg0 | reg1)
 01011: ADD   reg0/imm16, reg1/imm16 -> C = reg0/imm16 + reg1/imm16
 01100: SUB   reg0/imm16, reg1/imm16 -> C = reg0/imm16 - reg1/imm16
 01101: MLT   reg0/imm16, reg1/imm16 -> C = reg0/imm16 * reg1/imm16
@@ -24,10 +24,10 @@ This means you can't chnage any Program Memory when Hunga-8 is running.
 10000: PUSH  imm16(addr)            -> [SP++] = addr
 10001: POP                          -> [SP--]
 10010: JMP   imm16(addr)            -> I = addr
-10011: JNZ   reg/imm16, imm16       -> I = (reg/imm16 != 0) ? (HLT : JMP A/B))
+10011: JNZ   reg/imm16, imm16(addr) -> I = (reg/imm16 != 0) ? (HLT : JMP addr)
 10100: JMS   imm16(addr)            -> [SP++] = G, JMP addr, [SP++] = G
 10101: JOS                          -> [SP--], JMP SP
-10110: EPL                          -> DATA BUS = EP
+10110: LEP                          -> DATA BUS = EP
 10111: HLT                          -> CLOCK SPEED = 0
 
 ## Regesters Layout
