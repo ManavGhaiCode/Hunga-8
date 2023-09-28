@@ -8,10 +8,41 @@
 */
 
 #include <iostream>
+#include <functional>
+#include <thread>
+
 #include "../Common/Instructions.h"
+#include "./Memory.h"
+
+#ifdef __linux__
+    #include <unistd.h>
+#elif _WIN32 || _WIN64
+    #include <windows.h>
+#endif
+
+void SetInterval(std::function<void(void)> function, int interval) {
+    std::thread th([&]() {
+        while(true) {
+            sleep(interval);
+            function();
+        }
+    });
+
+    th.detach();
+}
+
+bool on;
+int hz;
 
 int main() {
     std::cout << "Welcome to the Hunga-8!" << std::endl;
+    hz = 10;
+
+    SetInterval(nullptr, 1000 / hz);
+
+    while (on) {
+        
+    }
 
     return 0;
 }
