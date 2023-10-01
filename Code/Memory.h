@@ -5,7 +5,7 @@
 
 std::vector<short> Memory(65536);
 std::vector<short> CharMemory(65536);
-std::vector<short> ProgramMemory(65536);
+std::vector<short> ProgramMemory(196608);
 
 // Resiter
 
