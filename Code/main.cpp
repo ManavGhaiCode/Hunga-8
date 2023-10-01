@@ -17,32 +17,22 @@
 #ifdef __linux__
     #include <unistd.h>
 #elif _WIN32 || _WIN64
-    #include <windows.h>
+    #include "./usleep.h"
 #endif
 
-void SetInterval(std::function<void(void)> function, int interval) {
-    std::thread th([&]() {
-        while(true) {
-            sleep(interval);
-            function();
-        }
-    });
+bool on = true;
+int hz = 1;
 
-    th.detach();
+void foo() {
+    std::cout << "Hello World!" << std::endl;
 }
-
-bool on;
-int hz;
 
 int main() {
     std::cout << "Welcome to the Hunga-8!" << std::endl;
     hz = 10;
 
-    SetInterval(nullptr, 1000 / hz);
-
     while (on) {
-        
+        foo();
+        usleep(1000000 / hz);
     }
-
-    return 0;
 }
